@@ -1,4 +1,7 @@
 import React from "react";
+import SearchCh from "./SearchCh";
+import Link from "next/link";
+import Image from "next/image";
 
 const RnMList = async () => {
   await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -11,12 +14,22 @@ const RnMList = async () => {
         <h2>
           <b>Characters</b>
         </h2>
+        <SearchCh />
         {result.results.map((character: any) => {
           return (
             <>
               {" "}
-              <li key={character.id}>{character.name}</li>
-              <img src={character.image}></img>
+              <li key={character.id}>
+                <Link href={`characters/${character.id}`}>
+                  {character.name}
+                </Link>
+              </li>
+              <Image
+                src={character.image}
+                alt={character.name}
+                width={300}
+                height={400}
+              />
             </>
           );
         })}
